@@ -1,6 +1,6 @@
 {
   "name": "@sultanyaron/create-git-branch",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Create git branch based on SM-UI-Refresh repo conventions",
   "main": "index.js",
   "bin": {
