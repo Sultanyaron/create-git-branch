@@ -1,0 +1,52 @@
+name: Publish to NPM
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: "Release type (one of): patch, minor, major, prepatch, preminor, premajor, prerelease"
+        required: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install dependencies
+        run: npm ci
+      - name: Git configuration
+        run: |
+          git config --global user.email "8423431295+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Github action"
+      - name: Bump release version
+        if: startsWith(github.event.inputs.release-type, 'pre') != true
+        run: |
+          echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_TYPE)" >> $GITHUB_ENV
+          echo "RELEASE_TAG=latest" >> $GITHUB_ENV
+        env:
+          RELEASE_TYPE: ${{ github.event.inputs.release-type }}
+      - name: Bump pre-release version
+        if: startsWith(github.event.inputs.release-type, 'pre')
+        run: |
+          echo "NEW_VERSION=$(npm --no-git-tag-version --preid=beta version $RELEASE_TYPE
+          echo "RELEASE_TAG=beta" >> $GITHUB_ENV
+        env:
+          RELEASE_TYPE: ${{ github.event.inputs.release-type }}
+      - name: Commit package.json changes and create tag
+        run: |
+          git add "package.json"
+          git commit -m "GH Actions bot: release ${{ env.NEW_VERSION }}"
+          git tag ${{ env.NEW_VERSION }}
+      - name: Publish package on NPM 📦
+        run: npm publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Push changes to repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin --force && git push --tags --force
