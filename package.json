@@ -4,7 +4,7 @@
   "description": "Create git branch based on SM-UI-Refresh repo conventions",
   "main": "index.js",
   "bin": {
-    "create-branch": "index.js"
+    "create-git-branch": "index.js"
   },
   "keywords": [],
   "author": "sultanyaron@gmail.com",
