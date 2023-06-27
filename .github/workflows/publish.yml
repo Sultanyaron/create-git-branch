@@ -23,9 +23,19 @@ jobs:
       - name: Set Variable
         id: set_var
         run: echo "::set-output name=my_variable::1233453"
-
       - name: Print Variable
         run: echo ${{ steps.set_var.outputs.my_variable }}
       - name: Print if
         if: steps.set_var.outputs.my_variable != ''
         run: echo ${{ steps.set_var.outputs.my_variable }}
+      - name: Find visual test comment
+        uses: peter-evans/find-comment@v2
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-regex: "^.*Visual tests failed, view report:.*$"
+      - name: Print FC
+        run: echo ${{ steps.fc.outputs.comment-id }}
+      - name: Print  FC if
+        if: steps.fc.outputs.comment-id != ''
+        run: echo ${{ steps.fc.outputs.comment-id }}
