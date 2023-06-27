@@ -22,7 +22,7 @@ jobs:
 
       - name: Set Variable
         id: set_var
-        run: echo "::set-output name=my_variable::Hello, world!"
+        run: echo "::set-output name=my_variable::1233453"
 
       - name: Print Variable
         run: echo ${{ steps.set_var.outputs.my_variable }}
