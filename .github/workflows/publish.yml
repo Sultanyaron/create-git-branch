@@ -2,27 +2,30 @@ name: Visual Tests
 on:
   pull_request:
     types:
-      - opened  
-      - synchronize  
-      - reopened  
-      - unlabeled  
+      - opened
+      - synchronize
+      - reopened
+      - unlabeled
 jobs:
   visual-tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-        ref: ${{ github.event.pull_request.head.ref }}
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-        registry-url: https://npm.pkg.github.com
-    - name: Test run
-      if: 'asdasd' != ''
-      run: |
-        npm install
-        npm run test:visual
-    
-    
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          registry-url: https://npm.pkg.github.com
+
+      - name: Set Variable
+        id: set_var
+        run: echo "::set-output name=my_variable::Hello, world!"
+
+      - name: Print Variable
+        run: echo ${{ steps.set_var.outputs.my_variable }}
+      - name: Print if
+        if: steps.set_var.outputs.my_variable != ''
+        run: echo ${{ steps.set_var.outputs.my_variable }}
