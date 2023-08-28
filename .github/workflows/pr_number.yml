@@ -26,7 +26,7 @@ jobs:
       - uses: actions/github-script@v6
         id: get_issue_number
         with:
-        script: |
+          script: |
               if (context.issue.number) {
                 // Return issue number if present
                 return context.issue.number;
@@ -42,4 +42,4 @@ jobs:
               }
             result-encoding: string
       - name: Issue number
-          run: echo '${{steps.get_issue_number.outputs.result}}'
+        run: echo '${{steps.get_issue_number.outputs.result}}'
