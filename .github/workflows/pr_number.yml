@@ -1,0 +1,28 @@
+name: Deploy
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+
+on:
+  push:
+    branches:
+      - theMaster
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          registry-url: https://npm.pkg.github.com
+      - name: PR Number
+      - run: |
+          echo PR #${{ github.event.number }} has been merged
