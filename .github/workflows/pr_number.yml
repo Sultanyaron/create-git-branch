@@ -44,4 +44,4 @@ jobs:
       - name: Set version variable
         run: echo "BUILD_VERSION=v${{ steps.get_issue_number.outputs.result }}" >> $GITHUB_ENV
       - name: Issue number
-        run: echo 'version is $BUILD_VERSION'
+        run: echo 'version is ${{ env.BUILD_VERSION }}'
