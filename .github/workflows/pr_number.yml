@@ -24,5 +24,6 @@ jobs:
           cache: "npm"
           registry-url: https://npm.pkg.github.com
       - name: PR Number
-      - run: |
-          echo PR #${{ github.event.number }} has been merged
+        run: |
+           echo PR #${{ github.event.number }} has been merged
+
