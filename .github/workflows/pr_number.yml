@@ -25,5 +25,4 @@ jobs:
           registry-url: https://npm.pkg.github.com
       - name: PR Number
         run: |
-           echo PR #${{ github.event.number }} has been merged
-
+          echo PR #${{ github.event.pull_request.number }} has been merged
