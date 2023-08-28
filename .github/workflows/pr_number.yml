@@ -41,5 +41,7 @@ jobs:
               ).data[0].number;
             }
           result-encoding: string
+      - name: Set version variable
+        run: echo "BUILD_VERSION=v${{ steps.get_issue_number.outputs.result }}" >> $GITHUB_ENV
       - name: Issue number
-        run: echo '${{steps.get_issue_number.outputs.result}}'
+        run: echo 'version is $BUILD_VERSION'
