@@ -23,7 +23,7 @@ jobs:
         uses: tj-actions/changed-files@v38
         with:
           separator: ","
-          files: /**/modules/*.{json}
+          files: "**/cloud-ui-modules/*.json"
       - name: Get changed files
         run: echo "CHANGED_FILES=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_ENV
       - name: Deploy
