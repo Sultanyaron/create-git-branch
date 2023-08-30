@@ -20,7 +20,7 @@ jobs:
           node-version: 18.12.1
       - name: Get changed files
         id: changed-files
-        run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})" >> $GITHUB_ENV
+        run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }}) | xargs" >> $GITHUB_ENV
       - name: Deploy
         run: node ./scripts/cloud-ui-modules-deploy.js
             
