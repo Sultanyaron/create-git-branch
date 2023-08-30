@@ -35,7 +35,7 @@ const result = pathSegments.map(path => {
     env = 'staging';
   }
   
-  const version = require(`./${path}`).version; // Assuming the version is a key inside the JSON file
+  const version = require(`../${path}`).version; // Assuming the version is a key inside the JSON file
   
   return {
     moduleName,
