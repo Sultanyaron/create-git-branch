@@ -19,6 +19,9 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const execa = require('execa')
-            const { stdout } = await execa('aws', ['s3', 'copy'])
-            console.log(stdout)
+            const { spawnSync } = require('child_process')
+            spawnSync('aws', ['s3', 'copy'], {
+              stdio: "inherit",
+              shell: true
+            })
+            
