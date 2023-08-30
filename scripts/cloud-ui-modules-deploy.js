@@ -20,5 +20,30 @@ const { CHANGED_FILES } = process.env;
 //     }
 //   }
 // };
-
 console.log(CHANGED_FILES)
+
+const pathSegments = CHANGED_FILES.split(',');
+
+const result = pathSegments.map(path => {
+  const parts = path.split('/');
+  const moduleName = parts[parts.length - 1].replace('.json', '');
+  
+  let env = '';
+  if (path.includes('sm-prod')) {
+    env = 'prod';
+  } else if (path.includes('sm-staging')) {
+    env = 'staging';
+  }
+  
+  const version = require(`./${path}`).version; // Assuming the version is a key inside the JSON file
+  
+  return {
+    moduleName,
+    env,
+    version
+  };
+});
+
+console.log(result);
+
+
