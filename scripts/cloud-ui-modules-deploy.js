@@ -2,7 +2,7 @@
 
 // import { spawnSync as spawn } from "child_process";
 
-const { CHANGED_FILES } = env
+const { CHANGED_FILES } = process.env;
 
 // export const spawnSync = (command, args, options = {}, alwaysThrow) => {
 //   const ret = spawn(command, args, {
