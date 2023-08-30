@@ -1,0 +1,24 @@
+name: Deploy cloud ui module version to staging or production
+
+on:
+  push:
+    paths:
+      - "environments/cloud-k8s-prod/sm-prod/cloud-ui-modules/**.json"
+      - "environments/cloud-k8s-staging/sm-staging/cloud-ui-modules/**.json"
+    branches:
+      - "test-deploy"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+      - name: Get changed files
+        id: changed-files
+        run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})" >> $GITHUB_ENV
+      - name: Deploy
+        run: node ./scripts/cloud-ui-modules-deploy.js
+            
