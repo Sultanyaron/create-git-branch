@@ -1,0 +1,24 @@
+name: Deploy cloud ui module version to staging or production
+
+on:
+  pull_request:
+    paths:
+      - "environments/cloud-k8s-prod/sm-prod/cloud-ui-modules/**.json"
+      - "environments/cloud-k8s-staging/sm-staging/cloud-ui-modules/**.json"
+    branches:
+      - "test-deploy"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const execa = require('execa')
+            const { stdout } = await execa('aws', ['s3', 'copy'])
+            console.log(stdout)
