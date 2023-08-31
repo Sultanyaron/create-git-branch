@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with: 
+        with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
@@ -27,5 +27,4 @@ jobs:
       - name: Get changed files
         run: echo "CHANGED_FILES=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_ENV
       - name: Deploy
-        run: node ./scripts/cloud-ui-modules-deploy.js
-            
+        run: node ./.github/workflows/cloud-ui-deploy-scripts/deploy.js

@@ -18,7 +18,7 @@ const deployResults = pathSegments.map((path) => {
     env = "staging";
   }
 
-  const version = require(`../${path}`).version;
+  const version = require(`../../../${path}`).version;
 
   console.log(`⏩ Deploying ${moduleName}-${version} to ${env}`);
   const childProcess = spawnSync(
@@ -41,9 +41,6 @@ const deployResults = pathSegments.map((path) => {
   }
 
   return {
-    moduleName,
-    env,
-    version,
     hasError,
   };
 });
