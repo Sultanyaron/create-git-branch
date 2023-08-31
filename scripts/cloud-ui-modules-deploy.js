@@ -20,7 +20,7 @@ const deployResults = pathSegments.map((path) => {
 
   const version = require(`../${path}`).version;
 
-  console.log(`Deploying ${moduleName}-${version} to ${env}`);
+  console.log(`⏩ Deploying ${moduleName}-${version} to ${env}`);
   const childProcess = spawnSync(
     "aws",
     `s3 sync ${AWS_S3_PROD_BUCKET}/builds/modules/${moduleName}/${version} ${AWS_S3_PROD_BUCKET}/${env}/modules/${moduleName}`.split(
@@ -32,7 +32,9 @@ const deployResults = pathSegments.map((path) => {
     }
   );
 
-  if (!childProcess.error) {
+  const hasError = !!childProcess.error || childProcess.status !== 0;
+
+  if (!hasError) {
     console.log(`✅ Successfully deployed ${moduleName}-${version} to ${env}`);
   } else {
     console.log(`❌ Failed to deploy ${moduleName}-${version} to ${env}`);
@@ -42,13 +44,13 @@ const deployResults = pathSegments.map((path) => {
     moduleName,
     env,
     version,
-    error: childProcess.error,
+    hasError,
   };
 });
 
 console.log(deployResults);
 
-const hasFailedDeployments = deployResults.some((result) => result.error);
+const hasFailedDeployments = deployResults.some((result) => result.hasError);
 
 if (hasFailedDeployments) {
   console.log("❌ Failed to deploy some modules");
