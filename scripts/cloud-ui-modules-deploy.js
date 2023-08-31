@@ -1,4 +1,4 @@
-import { spawnSync as spawn } from "child_process";
+const spawnSync = require("child_process");
 
 const { CHANGED_FILES } = process.env;
 const AWS_S3_PROD_BUCKET = "s3://cloud-ui-modules-prod";
