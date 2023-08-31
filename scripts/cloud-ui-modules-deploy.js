@@ -1,4 +1,4 @@
-const spawn = require("child_process");
+const { spawnSync: spawn } = require("child_process");
 
 const { CHANGED_FILES } = process.env;
 const AWS_S3_PROD_BUCKET = "s3://cloud-ui-modules-prod";
@@ -37,6 +37,8 @@ const mfesToUpdate = pathSegments.map((path) => {
     version,
   };
 });
+
+console.log(mfesToUpdate);
 
 for (const mfeToUpdate of mfesToUpdate) {
   const { moduleName, version, env } = mfeToUpdate;
