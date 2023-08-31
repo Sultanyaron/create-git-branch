@@ -3,7 +3,7 @@ const spawnSync = require("child_process");
 const { CHANGED_FILES } = process.env;
 const AWS_S3_PROD_BUCKET = "s3://cloud-ui-modules-prod";
 
-export const spawnSync = (command, args) => {
+const spawnSync = (command, args) => {
   const ret = spawn(command, args, {
     stdio: "inherit",
     shell: true,
