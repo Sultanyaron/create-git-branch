@@ -53,6 +53,5 @@ console.log(deployResults);
 const hasFailedDeployments = deployResults.some((result) => result.hasError);
 
 if (hasFailedDeployments) {
-  console.log("❌ Failed to deploy some modules");
-  // throw new Error();
+  throw new Error();
 }
