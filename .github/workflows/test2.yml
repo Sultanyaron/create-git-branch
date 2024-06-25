@@ -1,6 +1,7 @@
-name: Testing something
+name: Testing something2
 on:
   pull_request:
+    types: [closed]
     branches:
       - main
 jobs:
