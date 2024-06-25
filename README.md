@@ -14,7 +14,7 @@ npm install -g @sultanyaron/create-git-branch
 
 ## Usage
 
-Simply run this command on your required repo
+Simply run this command on your required repo:
 
 ```sh
 create-git-branch
