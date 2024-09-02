@@ -1,3 +1,3 @@
-import { context } from "@actions/github";
+const { context } = require("@actions/github");
 
 console.log(context);
