@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v3
-      - run: node ./logContext.js
+      - run: node ../../logContext.js
