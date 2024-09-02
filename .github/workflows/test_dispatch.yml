@@ -1,0 +1,19 @@
+name: Manual dispatch test
+
+on:
+  workflow_dispatch:
+    inputs:
+      namespace:
+        description: "k8s namespace to deploy."
+        required: true
+        type: choice
+        options:
+          - k8s-gh
+          - k8s-dev
+jobs:
+  test:
+    name: test manual workflow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+      - run: node ./logContext.js
