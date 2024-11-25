@@ -14,7 +14,7 @@ runs:
         script: |
           const teamName = core.getInput('team_name');
 
-          const { data } = await octokit.rest.teams.listMembersInOrg({
+          const { data } = await github.rest.teams.listMembersInOrg({
             org: "redislabsdev",
             team_slug: teamName,
           });
