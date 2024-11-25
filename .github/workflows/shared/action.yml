@@ -8,6 +8,8 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: node validateTeam.js
+    - name: Validate team permission
+      shell: bash
+      run: node ./validateTeam.js
       env:
         TEAM_NAME: ${{ inputs.team_name }}
