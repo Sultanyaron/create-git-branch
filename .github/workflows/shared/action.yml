@@ -13,7 +13,6 @@ runs:
       with:
         script: |
           const teamName = core.getInput('team_name');
-          const context = github.context;
 
           const { data } = await octokit.rest.teams.listMembersInOrg({
             org: "redislabsdev",
