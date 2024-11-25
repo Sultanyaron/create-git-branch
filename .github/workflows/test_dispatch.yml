@@ -22,3 +22,5 @@ jobs:
         uses: ./.github/workflows/shared
         with:
           team_name: cloud-ui-approvers
+          secrets:
+            TOKEN_TO_DELETE: ${{ secrets.TOKEN_TO_DELETE }}
