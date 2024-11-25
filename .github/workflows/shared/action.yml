@@ -9,7 +9,29 @@ runs:
   using: composite
   steps:
     - name: Validate team permission
-      shell: bash
-      run: node ./validateTeam.js
-      env:
-        TEAM_NAME: ${{ inputs.team_name }}
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const teamName = core.getInput('team_name');
+          const context = github.context;
+
+          const { data } = await octokit.rest.teams.listMembersInOrg({
+            org: "redislabsdev",
+            team_slug: teamName,
+          });
+
+          console.log(`Checking team permission for ${context.actor}`);
+
+          console.log(
+            `Team members of ${teamName} are: ${data.map((user) => user.login).join(", ")}`
+          );
+
+          const isUserIncludedInTeam = data.some(
+            (user) => user.login === context.actor
+          );
+
+          if (!isUserIncludedInTeam) {
+            throw new Error(
+              `GitHub user: ${context.actor} is not part of ${teamName} and cannot run this workflow`
+            );
+          }

@@ -18,9 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
       - uses: actions/setup-node@v3
-      - run: npm ci
       - name: Validate team permission
         uses: ./.github/workflows/shared
         with:
           team_name: cloud-ui-approvers
-          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_DELETE }}
