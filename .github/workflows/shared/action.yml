@@ -12,10 +12,13 @@ runs:
       uses: actions/github-script@v7
       with:
         team_name: ${{ inputs.team_name }}
+        TOKEN_TO_DELETE: ${{ secrets.TOKEN_TO_DELETE }}
         script: |
           const teamName = core.getInput('team_name');
+          const token = core.getInput('TOKEN_TO_DELETE');
+          const octo = github.getOctokit(token);
 
-          const { data } = await github.rest.teams.listMembersInOrg({
+          const { data } = await octo.rest.teams.listMembersInOrg({
             org: "redislabsdev",
             team_slug: teamName,
           });
