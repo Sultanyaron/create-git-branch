@@ -1,0 +1,13 @@
+name: Validate team permission
+description: Deploy resource version on argoCD.
+inputs:
+  team_name:
+    description: "The team name to validate permission for"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - run: node validateTeam.js
+      env:
+        TEAM_NAME: ${{ inputs.team_name }}
