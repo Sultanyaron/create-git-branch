@@ -22,4 +22,4 @@ jobs:
         uses: ./shared/validate-team-permission.yml
         with:
           team_name: cloud-ui-approvers
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TO_DELETE }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_DELETE }}
