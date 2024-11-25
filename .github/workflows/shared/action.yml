@@ -4,6 +4,10 @@ inputs:
   team_name:
     description: "The team name to validate permission for"
     required: true
+secrets:
+  TOKEN_TO_DELETE:
+    description: "GitHub token to delete the branch"
+    required: true
 
 runs:
   using: composite
