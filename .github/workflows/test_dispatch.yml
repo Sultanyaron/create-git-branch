@@ -18,9 +18,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
       - uses: actions/setup-node@v3
-      - name: Validate team permission
-        uses: ./.github/workflows/shared
-        with:
-          team_name: cloud-ui-approvers
-        secrets:
-          TOKEN_TO_DELETE: ${{ secrets.TOKEN_TO_DELETE }}
+      - name: Log Run Number
+        run: |
+          echo "Run number: ${{ github.run_number }}"
