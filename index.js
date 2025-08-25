@@ -68,7 +68,7 @@ const init = () => {
         ])
         .then(({ isBranchNameConfirmed }) => {
           if (isBranchNameConfirmed) {
-            exec(`git checkout -b ${branchName}`, (error, stdout, stderr) => {
+            exec(`git checkou -b ${branchName}`, (error, stdout, stderr) => {
               if (error) {
                 console.log(error.message);
                 return;

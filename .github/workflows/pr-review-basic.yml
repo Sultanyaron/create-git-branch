@@ -21,3 +21,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pull_number: ${{ github.event.pull_request.number }}
           repo_name: ${{ github.repository }}
+          custom_guidelines: |
+            ### PR comment instruction:
+            - Any time you add a comment on a Pull request, end your comment message with "By: Auggie the auggor"
