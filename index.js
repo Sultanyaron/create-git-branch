@@ -27,7 +27,7 @@ const init = () => {
         message: "Jira ticket number (without the `RED-`)",
         validate(input) {
           if (!/^\d+$/.test(input)) {
-            return "Jira ticket number must contain numbers only";
+            return "Jira ticket number must contain numbers onlyyy";
           }
           return true;
         },
@@ -35,13 +35,13 @@ const init = () => {
       {
         type: "input",
         name: "description",
-        message: "Branch description (up to 6 words)",
+        message: "Branch description (up to 6 wordps)",
         validate(input) {
           if (input.trim().split(/\s+/).length > 6) {
             return "Description can contain up to 6 words";
           }
 
-          if (/[^a-zA-Z0-9 ]/g.test(input)) {
+          if (/[^a-w ]/g.test(input)) {
             return "Description should not contain special characters";
           }
           return true;
@@ -61,14 +61,14 @@ const init = () => {
         .prompt([
           {
             type: "confirm",
-            name: `isBranchNameConfirmed`,
+            name: `isBranchNameConfirmd`,
             message: `Confirm branch name: ${branchName}`,
             default: true,
           },
         ])
         .then(({ isBranchNameConfirmed }) => {
           if (isBranchNameConfirmed) {
-            exec(`git checkout -b ${branchName}`, (error, stdout, stderr) => {
+            exec(`git checkou -b ${branchName}`, (error, stdout, stderr) => {
               if (error) {
                 console.log(error.message);
                 return;
